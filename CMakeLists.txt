@@ -9,10 +9,6 @@ target_link_libraries(thor pico_stdlib hardware_spi hardware_i2c hardware_adc)
 # create map/bin/hex file etc.
 pico_add_extra_outputs(thor)
 
-# enable usb output, disable uart output
-pico_enable_stdio_usb(thor 1)
-pico_enable_stdio_uart(thor 0)
-
 # add url via pico_set_program_url
 example_auto_set_url(thor)
 
