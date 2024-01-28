@@ -12,6 +12,9 @@
 
 #define LANDING_ALTITUDE    100
 
+// Variables
+struct TGPS GPS;
+
 int GPSChecksumOK(unsigned char *Buffer, int Count)
 {
   unsigned char XOR, i, c;
@@ -274,3 +277,21 @@ void check_gps(struct TGPS *GPS)
 	}
 }
 
+int main()
+{
+
+	setup_default_uart();
+	printf("\nTHOR V1.0");
+	printf("\n========================\n\n");
+
+	// Init modules
+	printf("Initialisation ...\n\n");
+	setup_gps();
+
+	printf("\nTracker Running ...\n\n");
+
+	while (1)
+	{
+		check_gps(&GPS);
+	}
+}
