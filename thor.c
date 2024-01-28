@@ -9,6 +9,7 @@
 #include "types.h"
 #include "misc.h"
 #include "gps.h"
+#include "prediction.h"
 
 #define LANDING_ALTITUDE    100
 
@@ -281,18 +282,32 @@ int main()
 {
 
     	stdio_init_all();
-//	setup_default_uart();
-	printf("\nTHOR V1.0");
+	sleep_ms(3000);
+	setup_default_uart();
+	printf("THOR V1.0 \n");
 	printf("\n========================\n\n");
 
 	// Init modules
 	printf("Initialisation ...\n\n");
 	setup_gps();
+	setup_prediction(&GPS);
 
 	printf("\nTracker Running ...\n\n");
 
 	while (1)
 	{
+//		printf("\nTracker Running ...\n\n");
 		check_gps(&GPS);
+//		check_prediction(&GPS);
 	}
 }
+/*
+int main() {
+    stdio_init_all();
+    while (true) {
+        printf("Hello, world!\n");
+        sleep_ms(1000);
+    }
+    return 0;
+}
+*/
