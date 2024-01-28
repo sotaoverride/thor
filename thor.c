@@ -280,6 +280,7 @@ void check_gps(struct TGPS *GPS)
 int main()
 {
 
+    	stdio_init_all();
 	setup_default_uart();
 	printf("\nTHOR V1.0");
 	printf("\n========================\n\n");
