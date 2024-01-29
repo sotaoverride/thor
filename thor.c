@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <malloc.h>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/uart.h"
@@ -15,6 +16,19 @@
 
 // Variables
 struct TGPS GPS;
+
+
+uint32_t getTotalHeap(void) {
+   extern char __StackLimit, __bss_end__;
+   
+   return &__StackLimit  - &__bss_end__;
+}
+
+uint32_t getFreeHeap(void) {
+   struct mallinfo m = mallinfo();
+
+   return getTotalHeap() - m.uordblks;
+}
 
 int GPSChecksumOK(unsigned char *Buffer, int Count)
 {
@@ -299,6 +313,8 @@ int main()
 //		printf("\nTracker Running ...\n\n");
 		check_gps(&GPS);
 //		check_prediction(&GPS);
+//		printf
+		printf("hello %l", getFreeHeap());
 	}
 }
 /*
