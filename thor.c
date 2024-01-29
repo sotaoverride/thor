@@ -314,7 +314,7 @@ int main()
 		check_gps(&GPS);
 //		check_prediction(&GPS);
 //		printf
-		printf("hello %l", getFreeHeap());
+		printf("hello %lu \n", getFreeHeap());
 	}
 }
 /*
