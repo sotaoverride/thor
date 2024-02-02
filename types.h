@@ -29,8 +29,8 @@ struct TGPS
 
 struct Cords
 {
-	uint16_t latitude;
-	uint16_t longitude;
+	int32_t latitude;
+	int32_t longitude;
 };
 
 #endif

@@ -16,10 +16,8 @@
 
 // Variables
 struct TGPS GPS;
-struct Cords  cords[700]=  {0};
+struct Cords  cords[350]=  {0};
 int cords_index = 0;
-uint32_t start_lat = 0;
-uint32_t start_long = 0;
 
 
 uint32_t getTotalHeap(void) {
@@ -135,7 +133,7 @@ void ProcessLine(struct TGPS *GPS, char *Buffer, int Count)
 					GPS->Longitude = FixPosition(longitude);
 					if (ew == 'W') GPS->Longitude = -GPS->Longitude;
 					GPS->Altitude = altitude;
-					struct Cords tmp  = {.latitude =(int16_t) GPS->Latitude, . longitude = (int16_t) GPS->Longitude};
+					struct Cords tmp  = {.latitude =(int32_t) GPS->Latitude, . longitude = (int32_t) GPS->Longitude};
 					cords[cords_index] = tmp;
 					cords_index++;
 				}
