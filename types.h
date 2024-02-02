@@ -27,4 +27,10 @@ struct TGPS
 	float PredictedLandingSpeed;
 };
 
+struct Cords
+{
+	uint16_t latitude;
+	uint16_t longitude;
+};
+
 #endif
