@@ -9,7 +9,7 @@
 
 #include "types.h"
 #include "misc.h"
-#include "gps.h"
+#include "thor.h"
 #include "prediction.h"
 
 #define LANDING_ALTITUDE    100
@@ -133,9 +133,11 @@ void ProcessLine(struct TGPS *GPS, char *Buffer, int Count)
 					GPS->Longitude = FixPosition(longitude);
 					if (ew == 'W') GPS->Longitude = -GPS->Longitude;
 					GPS->Altitude = altitude;
-					struct Cords tmp  = {.latitude =(int32_t) GPS->Latitude, . longitude = (int32_t) GPS->Longitude};
-					cords[cords_index] = tmp;
-					cords_index++;
+					if (cords_index < INT_MAX) {
+						struct Cords tmp  = {.latitude =(int32_t) GPS->Latitude, . longitude = (int32_t) GPS->Longitude};
+						cords[cords_index] = tmp;
+						cords_index++;
+					}
 				}
 
 				GPS->Satellites = satellites;
