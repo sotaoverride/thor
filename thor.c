@@ -134,7 +134,7 @@ void ProcessLine(struct TGPS *GPS, char *Buffer, int Count)
 					if (ew == 'W') GPS->Longitude = -GPS->Longitude;
 					GPS->Altitude = altitude;
 					if (cords_index < INT_MAX) {
-						struct Cords tmp  = {.latitude =(int32_t) (GPS->Latitude * 1000000), . longitude = (int32_t) (GPS->Longitude * 1000)};
+						struct Cords tmp  = {.latitude =(int32_t) (GPS->Latitude * 1000000), . longitude = (int32_t) (GPS->Longitude * 1000000)};
 						cords[cords_index] = tmp;
 						cords_index++;
 					}
