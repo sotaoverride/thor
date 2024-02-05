@@ -18,7 +18,9 @@
 struct TGPS GPS;
 struct Cords  cords[350]=  {0};
 int cords_index = 0;
-
+float find_distance(struct Cords c_1, struct Cords c_2){
+	return ((c_1.latitude -c_2.latitude)^2 + (c_1.longitude - c_2.longitude)^2)^.5
+}
 
 uint32_t getTotalHeap(void) {
    extern char __StackLimit, __bss_end__;
@@ -133,11 +135,19 @@ void ProcessLine(struct TGPS *GPS, char *Buffer, int Count)
 					GPS->Longitude = FixPosition(longitude);
 					if (ew == 'W') GPS->Longitude = -GPS->Longitude;
 					GPS->Altitude = altitude;
-					if (cords_index < INT_MAX) {
+					if (cords_index  ==  0) {
 						struct Cords tmp  = {.latitude =(int32_t) (GPS->Latitude * 1000000), . longitude = (int32_t) (GPS->Longitude * 1000000)};
 						cords[cords_index] = tmp;
 						cords_index++;
 					}
+					else {
+						struct Cords tmp  = {.latitude =(int32_t) (GPS->Latitude * 1000000), . longitude = (int32_t) (GPS->Longitude * 1000000)};
+						if (find_distance(tmp, cords[cords_index-1]) >= 38.333333) {
+						       cords[cords_index] = tmp;
+                                                	cords_index++;	
+						}
+					}
+
 				}
 
 				GPS->Satellites = satellites;
