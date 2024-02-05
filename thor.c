@@ -19,7 +19,7 @@ struct TGPS GPS;
 struct Cords  cords[350]=  {0};
 int cords_index = 0;
 int32_t find_distance(struct Cords c_1, struct Cords c_2){
-	return (((c_1.latitude -c_2.latitude) * (c_1.latitude -c_2.latitude)) + ((c_1.longitude - c_2.longitude) * (c_1.longitude - c_2.longitude)) )
+	return (SQUARE(c_1.latitude -c_2.latitude) + SQUARE(c_1.longitude - c_2.longitud) )
 }
 
 uint32_t getTotalHeap(void) {
@@ -142,7 +142,13 @@ void ProcessLine(struct TGPS *GPS, char *Buffer, int Count)
 					}
 					else {
 						struct Cords tmp  = {.latitude =(int32_t) (GPS->Latitude * 1000000), . longitude = (int32_t) (GPS->Longitude * 1000000)};
-						if (find_distance(tmp, cords[cords_index-1]) >= (38.333333 * 38.333333) {
+						/*
+						 * 50 miles is 264,000 feet
+						 * say you want to log only when the dist                                                             ance is more than 100 feet
+						 * so it would be 100 / 264,000 = 0.000378
+
+						 */ .000378 * 1000000 = 378
+						if (find_distance(tmp, cords[cords_index-1]) >= (SQUARE(378))) {
 						       cords[cords_index] = tmp;
                                                 	cords_index++;	
 						}
